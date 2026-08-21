@@ -1,0 +1,200 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center,
+      #172554,
+      #0f172a 50%,
+      #020617);
+  color: white;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+.intro.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Logo */
+.logo-container {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  font-family: Georgia, serif;
+  font-size: 100px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #38bdf8, #a78bfa, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+
+.logo span:first-child {
+  margin-right: -20px;
+}
+
+.logo span:last-child {
+  margin-left: -5px;
+}
+
+/* Circle */
+.circle {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(#020617, #020617) padding-box,
+    linear-gradient(135deg, #38bdf8, #a78bfa, #e879f9) border-box;
+  animation: rotateCircle 5s linear infinite;
+}
+
+/* Name */
+.intro h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.intro p {
+  margin-top: 20px;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  margin-top: 65px;
+  min-height: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.dots {
+  display: inline-flex;
+  margin-left: 4px;
+  letter-spacing: 3px;
+  font-size: 18px;
+}
+
+.dots i {
+  font-style: normal;
+  opacity: .15;
+  animation: loadingDot 1.4s infinite;
+}
+
+.dots i:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dots i:nth-child(2) {
+  animation-delay: .25s;
+}
+
+.dots i:nth-child(3) {
+  animation-delay: .5s;
+}
+
+.dots i:nth-child(4) {
+  animation-delay: .75s;
+}
+
+@keyframes loadingDot {
+
+  0%,
+  100% {
+    opacity: .15;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* Animations */
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes logoGlow {
+  from {
+    filter: drop-shadow(0 0 5px #38bdf8);
+  }
+
+  to {
+    filter:
+      drop-shadow(0 0 20px #8b5cf6) drop-shadow(0 0 30px #e879f9);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .logo-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .circle {
+    width: 165px;
+    height: 165px;
+  }
+
+  .logo {
+    font-size: 75px;
+  }
+
+  .intro h1 {
+    font-size: 20px;
+    letter-spacing: 5px;
+  }
+
+  .intro p {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  .loading {
+    font-size: 11px;
+  }
+
+  .dots {
+    font-size: 15px;
+  }
+}

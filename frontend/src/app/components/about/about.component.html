@@ -1,0 +1,25 @@
+<section class="about section" id="about">
+    <div class="container about-grid">
+        <div appReveal [revealIndex]="0">
+            <div class="section-kicker">01 — ABOUT ME</div>
+            <h2>I turn ideas into<br><span>useful digital products.</span></h2>
+            <div class="quote"><span>“</span>
+                <h3>Code is how I turn<br>problems into solutions.</h3>
+                <p>— Mohamed Bakr</p>
+            </div>
+        </div>
+        <div appReveal [revealIndex]="1">@if(profile()?.bio){<p class="lead">{{profile().bio}}</p>}<p class="muted">
+                Strong foundation in Data Structures, Algorithms, Object-Oriented Programming and Software Engineering
+                principles.</p>
+            <div class="about-focus">
+                <div><i class="fa-solid fa-window-restore"></i><span>Web Applications</span></div>
+                <div><i class="fa-solid fa-chart-line"></i><span>Dashboards &amp; Admin Panels</span></div>
+                <div><i class="fa-solid fa-cart-shopping"></i><span>E-Commerce Platforms</span></div>
+            </div>
+            <div class="stats">
+                <div><b>{{projectsCount()}}</b><span>Projects Built</span></div>
+                <div><b>{{trainingCount()}}</b><span>Trainings &amp; Certs</span></div>
+            </div>
+        </div>
+    </div>
+</section>

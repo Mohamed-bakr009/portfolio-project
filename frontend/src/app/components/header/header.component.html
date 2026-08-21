@@ -1,0 +1,28 @@
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="brand-mark">MB</span>.<i
+        class="fa-solid fa-arrow-up-right brand-arrow"></i></a>
+
+    <nav class="nav-links" [class.open]="menuOpen">
+      @for (link of navLinks; track link.id) {
+      <a [class.active]="isActive(link.id)" [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      }
+      @if(cvAvailable()){<button class="nav-cv-mobile" type="button" (click)="openCvFromMobile()">
+        View CV <i class="fa-regular fa-file-lines"></i>
+      </button>}
+    </nav>
+
+    <div class="nav-right">
+      <button class="theme-toggle" type="button"
+        [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        (click)="toggleTheme()">
+        <span class="knob"><i [class]="theme.theme() === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i></span>
+      </button>
+      @if(cvAvailable()){<button class="nav-cv" type="button" (click)="openCv()">View CV <i
+          class="fa-regular fa-file-lines"></i></button>}
+      <button class="menu-btn" type="button" aria-label="Open menu" (click)="toggleMenu()">
+        <i [class]="menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
+      </button>
+    </div>
+  </div>
+</header>

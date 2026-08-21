@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+<rect width="1200" height="700" fill="#f4f7fc"/><rect width="210" height="700" fill="#081b43"/><text x="35" y="55" font-family="Arial" font-size="22" font-weight="700" fill="#fff">ADMIN.</text>
+<g fill="#91a6ca" font-family="Arial" font-size="15"><text x="35" y="125">Dashboard</text><text x="35" y="170">Orders</text><text x="35" y="215">Products</text><text x="35" y="260">Customers</text></g>
+<text x="250" y="75" font-family="Arial" font-size="28" font-weight="700" fill="#101828">Order Management</text><text x="250" y="105" font-family="Arial" font-size="13" fill="#7b8797">Track your business performance</text>
+<g><rect x="250" y="145" width="205" height="105" rx="12" fill="#fff"/><rect x="480" y="145" width="205" height="105" rx="12" fill="#fff"/><rect x="710" y="145" width="205" height="105" rx="12" fill="#fff"/><rect x="940" y="145" width="205" height="105" rx="12" fill="#fff"/></g>
+<g fill="#7a8798" font-family="Arial" font-size="12"><text x="275" y="180">TOTAL ORDERS</text><text x="505" y="180">REVENUE</text><text x="735" y="180">CUSTOMERS</text><text x="965" y="180">PRODUCTS</text></g>
+<g fill="#132d61" font-family="Arial" font-size="25" font-weight="700"><text x="275" y="220">1,248</text><text x="505" y="220">$24.8K</text><text x="735" y="220">842</text><text x="965" y="220">156</text></g>
+<rect x="250" y="280" width="665" height="350" rx="12" fill="#fff"/><text x="275" y="320" font-family="Arial" font-size="16" font-weight="700" fill="#101828">Sales Overview</text>
+<polyline points="280,550 360,505 440,530 520,430 600,465 680,390 760,420 840,350 885,375" fill="none" stroke="#1769e0" stroke-width="5"/><line x1="280" y1="570" x2="885" y2="570" stroke="#dce3ee" stroke-width="2"/>
+<rect x="940" y="280" width="205" height="350" rx="12" fill="#fff"/><text x="965" y="320" font-family="Arial" font-size="16" font-weight="700" fill="#101828">Recent Orders</text><g stroke="#e8edf3"><line x1="965" y1="355" x2="1120" y2="355"/><line x1="965" y1="415" x2="1120" y2="415"/><line x1="965" y1="475" x2="1120" y2="475"/><line x1="965" y1="535" x2="1120" y2="535"/></g></svg>

@@ -1,0 +1,89 @@
+<div class="cv-modal" [class.open]="cvModal.isOpen() && cv().available" (click)="onBackdropClick($event)">
+  <div class="cv-modal-inner digital-cv">
+    <button class="cv-close" aria-label="Close" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="cv-scroll">
+      <div class="cv-tag"><i class="fa-regular fa-file-lines"></i> DIGITAL CV</div>
+      @if(profile().show.name){<h2 class="cv-name">{{ profile().name }}</h2>}
+      <p class="cv-role">SOFTWARE ENGINEERING STUDENT &nbsp;|&nbsp; WEB DEVELOPER</p>
+      <div class="cv-top">
+        <p class="cv-bio">{{ profile().bio }}</p>
+        <div class="cv-contact">
+          <span>{{ profile().location }}</span>
+          <span>{{ profile().phone }}</span>
+          <span>{{ profile().email }}</span>
+        </div>
+      </div>
+
+      @if (cv().summary) {
+      <section class="cv-summary">
+        <div class="cv-h">SUMMARY</div>
+        <p class="cv-bio">{{ cv().summary }}</p>
+      </section>
+      }
+
+      <div class="cv-grid">
+        <div>
+          <div class="cv-h">SELECTED PROJECTS</div>
+          @for (project of cv().projects; track project.title) {
+          <div class="cv-entry">
+            <h4>{{ project.title }}</h4><span class="cv-org">{{ project.org }}</span>
+          </div>
+          }
+        </div>
+
+        <div>
+          <div class="cv-h">EDUCATION</div>
+          @for (edu of cv().education; track edu.title) {
+          <div class="cv-entry">
+            <h4>{{ edu.title }}</h4><span class="cv-org">{{ edu.org }}</span><span class="cv-date">{{ edu.date }}</span>
+          </div>
+          }
+
+          @if (cv().experience.length) {
+          <div class="cv-h">EXPERIENCE</div>
+          @for (item of cv().experience; track $index) {
+          <div class="cv-entry">
+            <h4>{{ item.title }}</h4>
+            <span class="cv-org">{{ item.org }}</span>
+            @if (item.date) { <span class="cv-date">{{ item.date }}</span> }
+          </div>
+          }
+          }
+
+          <div class="cv-h">TRAINING &amp; CERTIFICATIONS</div>
+          @for (item of cv().training; track item.title) {
+          <div class="cv-entry">
+            <h4>{{ item.title }}</h4><span class="cv-org">{{ item.org }}</span>
+          </div>
+          }
+
+          <div class="cv-h">TECHNICAL SKILLS</div>
+          <div class="cv-pills">
+            @for (skill of cv().techSkills; track skill) {
+            <span>{{ skill }}</span>
+            }
+          </div>
+
+          <div class="cv-h">SOFT SKILLS</div>
+          <div class="cv-pills soft">
+            @for (skill of cv().softSkills; track skill) {
+            <span>{{ skill }}</span>
+            }
+          </div>
+
+          <div class="cv-h">LANGUAGES</div>
+          @for (lang of cv().languages; track lang.name) {
+          <div class="cv-lang"><span>{{ lang.name }}</span><b>{{ lang.level }}</b></div>
+          }
+
+        </div>
+      </div>
+
+      <div class="cv-foot">
+        <a class="btn primary" [href]="cv().pdfUrl" download>Download PDF <i class="fa-solid fa-arrow-down"></i></a>
+        <a class="btn ghost" [href]="cv().pdfUrl" target="_blank">Open Original PDF <i
+            class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

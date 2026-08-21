@@ -1,0 +1,50 @@
+<div class="admin-page-head">
+    <h1>Projects</h1>
+    <p>Every public project card has the same size. Use one visibility button for each project or all projects.</p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+<div class="admin-card admin-toolbar"><button class="admin-btn" [class.danger]="allVisible()"
+        [class.primary]="!allVisible()" (click)="toggleAll()"><i class="fa-solid" [class.fa-eye-slash]="allVisible()"
+            [class.fa-eye]="!allVisible()"></i>{{allVisible()?'Hide all projects':'Show all
+        projects'}}</button><span>{{visibleCount()}} / {{projects().length}} visible</span></div>
+<div class="admin-card">
+    <div class="admin-list">
+        @for(p of projects();track p._id){<div class="admin-item project-admin-item"
+            [class.is-hidden]="p.visible===false">
+            <div class="admin-project-thumb"><img [src]="thumb(p)" [alt]="p.title"></div>
+            <div class="project-edit-fields"><input [(ngModel)]="p.title" [name]="'t-'+p._id" placeholder="Title"><input
+                    [(ngModel)]="p.category" [name]="'c-'+p._id" placeholder="Category"><textarea
+                    [(ngModel)]="p.description" [name]="'d-'+p._id" rows="2" placeholder="Description"></textarea><input
+                    [(ngModel)]="p.technologiesText" [name]="'tech-'+p._id" placeholder="React, Node.js">
+                <div class="admin-form-grid"><input [(ngModel)]="p.liveUrl" [name]="'l-'+p._id"
+                        placeholder="Live URL"><input [(ngModel)]="p.githubUrl" [name]="'g-'+p._id"
+                        placeholder="GitHub"></div>
+            </div>
+            <div class="admin-item-actions"><label class="admin-btn ghost small"><i
+                        class="fa-solid fa-image"></i>Image<input type="file" accept="image/*"
+                        (change)="onImageSelected($event,p)" hidden></label><button class="admin-btn primary small"
+                    (click)="save(p)"><i class="fa-solid fa-floppy-disk"></i>Save</button><button
+                    class="admin-btn ghost small" (click)="toggle(p)"><i class="fa-solid"
+                        [class.fa-eye]="p.visible===false"
+                        [class.fa-eye-slash]="p.visible!==false"></i>{{p.visible!==false?'Hide':'Show'}}</button><button
+                    class="admin-btn danger small" (click)="remove(p)"><i class="fa-solid fa-trash"></i>Delete</button>
+            </div>
+        </div>}@empty{<p class="admin-empty">No projects yet.</p>}
+    </div>
+</div>
+<div class="admin-card">
+    <h2>Add project</h2>
+    <div class="admin-avatar-row">@if(newImagePreview){<img class="admin-thumb" [src]="newImagePreview" alt="">}<label
+            class="admin-btn ghost small">Choose image<input type="file" accept="image/*" (change)="onNewImage($event)"
+                hidden></label></div>
+    <div class="admin-form-grid"><label><span>Title</span><input [(ngModel)]="newProject.title"
+                name="nt"></label><label><span>Category</span><input [(ngModel)]="newProject.category"
+                name="nc"></label><label class="full"><span>Description</span><textarea
+                [(ngModel)]="newProject.description" name="nd"></textarea></label><label
+            class="full"><span>Technologies</span><input [(ngModel)]="newProject.technologiesText"
+                name="ntech"></label><label><span>Live URL</span><input [(ngModel)]="newProject.liveUrl"
+                name="nl"></label><label><span>GitHub</span><input [(ngModel)]="newProject.githubUrl" name="ng"></label>
+    </div>
+    <div class="admin-btn-row"><button class="admin-btn primary" [disabled]="saving()" (click)="add()"><i
+                class="fa-solid fa-plus"></i>{{saving()?'Adding…':'Add project'}}</button></div>
+</div>

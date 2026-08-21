@@ -1,0 +1,37 @@
+<section class="skills section" id="skills">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">02 — SKILLS</div>
+        <h2>My <span>toolbox.</span></h2>
+      </div>
+      <p>Technologies I use to build modern web experiences.</p>
+    </div>
+    <div class="skills-grid">
+      @for (category of categories(); track category.title; let i = $index) {
+      <div class="skill-card" appReveal [revealIndex]="i">
+        <div class="skill-card-head">
+          <i [class]="category.icon"></i>
+          <div>
+            <h3>{{ category.title }}</h3>
+            <p>{{ category.description }}</p>
+          </div>
+          <span class="skill-count">{{ category.count }}</span>
+        </div>
+        <div class="skill-icon-grid">
+          @for (item of category.items; track item.label) {
+          <div>
+            @if (item.badgeText) {
+            <b class="lang-badge">{{ item.badgeText }}</b>
+            } @else {
+            <i [class]="item.icon + ' ' + item.iconClass"></i>
+            }
+            <span>{{ item.label }}</span>
+          </div>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

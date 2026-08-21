@@ -1,0 +1,25 @@
+<div class="admin-auth">
+  <form class="admin-auth-card" (ngSubmit)="submit()">
+    <div class="admin-auth-brand">MB<span>.</span></div>
+    <h1>Admin Login</h1>
+    <p class="admin-auth-sub">Sign in to manage the portfolio content.</p>
+
+    @if (error()) {
+    <div class="admin-alert error">{{ error() }}</div>
+    }
+
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
+    </label>
+
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password" />
+    </label>
+
+    <button type="submit" class="admin-btn primary" [disabled]="loading()">
+      {{ loading() ? 'Signing in…' : 'Sign in' }}
+    </button>
+  </form>
+</div>

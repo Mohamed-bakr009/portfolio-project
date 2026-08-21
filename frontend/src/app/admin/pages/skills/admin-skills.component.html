@@ -1,0 +1,32 @@
+<div class="admin-page-head">
+    <h1>Skills</h1>
+    <p>Edit the icon, category, visibility and whether each skill appears in the technology strip.</p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+<div class="admin-card">
+    <h2>Add skill</h2>
+    <div class="admin-form-grid"><label><span>Name</span><input [(ngModel)]="newSkill.name"
+                name="newName"></label><label><span>Category</span><input [(ngModel)]="newSkill.category"
+                name="newCategory" placeholder="Frontend"></label><label><span>Font Awesome icon</span><input
+                [(ngModel)]="newSkill.icon" name="newIcon" placeholder="fa-brands fa-angular"></label></div>
+    <div class="admin-btn-row"><button class="admin-btn primary" (click)="add()"><i class="fa-solid fa-plus"></i>Add
+            skill</button></div>
+</div>
+<div class="admin-card">
+    <div class="admin-list">
+        @for(s of skills();track s._id){<div class="admin-item skill-admin-item" [class.is-hidden]="s.visible===false">
+            <div class="skill-preview"><i [class]="s.icon || 'fa-solid fa-code'"></i><span>{{s.name}}</span></div>
+            <div class="skill-edit-fields"><input [(ngModel)]="s.name" [name]="'n-'+s._id" placeholder="Name"><input
+                    [(ngModel)]="s.category" [name]="'c-'+s._id" placeholder="Category"><input [(ngModel)]="s.icon"
+                    [name]="'i-'+s._id" placeholder="Icon"></div>
+            <div class="admin-item-actions"><button class="admin-btn primary small" (click)="save(s)"><i
+                        class="fa-solid fa-floppy-disk"></i>Save</button><button class="admin-btn ghost small"
+                    (click)="toggleTech(s)"><i class="fa-solid fa-bolt"></i>{{s.showInTechStrip?'Hide from strip':'Show
+                    in strip'}}</button><button class="admin-btn ghost small" (click)="toggleVisible(s)"><i
+                        class="fa-solid" [class.fa-eye]="s.visible===false"
+                        [class.fa-eye-slash]="s.visible!==false"></i>{{s.visible!==false?'Hide':'Show'}}</button><button
+                    class="admin-btn danger small" (click)="remove(s)"><i class="fa-solid fa-trash"></i>Delete</button>
+            </div>
+        </div>}@empty{<p class="admin-empty">No skills yet.</p>}
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="admin-shell">
+  <header class="admin-mobile-header">
+    <a class="admin-brand" href="/" target="_blank">MB<span>.</span></a>
+    <div class="admin-mobile-actions">
+      <span class="admin-mobile-user">{{auth.currentUser()?.email}}</span>
+      <button class="admin-menu-btn" type="button" (click)="toggleMenu()"
+        [attr.aria-label]="menuOpen()?'Close menu':'Open menu'"><i
+          [class]="menuOpen()?'fa-solid fa-xmark':'fa-solid fa-bars'"></i></button>
+    </div>
+  </header>
+
+  <aside class="admin-sidebar" [class.mobile-open]="menuOpen()">
+    <div class="admin-sidebar-top"><a class="admin-brand" href="/" target="_blank">MB<span>.</span></a><button
+        class="admin-menu-btn sidebar-close" (click)="closeMenu()"><i class="fa-solid fa-xmark"></i></button></div>
+    <nav>
+      @for(link of navLinks;track link.path){<a [routerLink]="link.path" routerLinkActive="active"
+        (click)="closeMenu()"><i [class]="link.icon"></i><span>{{link.label}}</span></a>}
+    </nav>
+    <div class="admin-sidebar-foot"><span>{{auth.currentUser()?.email}}</span><button type="button"
+        class="admin-btn ghost" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i>Logout</button></div>
+  </aside>
+
+  <main class="admin-content"><router-outlet></router-outlet></main>
+</div>

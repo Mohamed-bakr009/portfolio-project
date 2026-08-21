@@ -1,0 +1,33 @@
+<div class="admin-page-head">
+    <h1>Education</h1>
+    <p>Add, edit, hide/show or permanently delete education entries.</p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+<div class="admin-card">
+    <div class="admin-list">@for(e of entries();track e._id){<div class="admin-item"
+            [class.is-hidden]="e.visible===false">
+            <div class="skill-edit-fields"><input [(ngModel)]="e.institution" [name]="'i'+e._id"
+                    placeholder="Institution"><input [(ngModel)]="e.degree" [name]="'d'+e._id"
+                    placeholder="Degree"><input [(ngModel)]="e.field" [name]="'f'+e._id" placeholder="Field"><input
+                    type="number" [(ngModel)]="e.startYear" [name]="'s'+e._id" placeholder="Start year"><input
+                    type="number" [(ngModel)]="e.endYear" [name]="'en'+e._id" placeholder="End year"></div>
+            <div class="admin-item-actions"><button class="admin-btn primary small" (click)="save(e)"><i
+                        class="fa-solid fa-floppy-disk"></i>Save</button><button class="admin-btn ghost small"
+                    (click)="toggle(e)"><i class="fa-solid" [class.fa-eye]="e.visible===false"
+                        [class.fa-eye-slash]="e.visible!==false"></i>{{e.visible!==false?'Hide':'Show'}}</button><button
+                    class="admin-btn danger small" (click)="remove(e)"><i class="fa-solid fa-trash"></i>Delete</button>
+            </div>
+        </div>}@empty{<p class="admin-empty">No education entries.</p>}</div>
+</div>
+<div class="admin-card">
+    <h2>Add education</h2>
+    <div class="admin-form-grid"><label><span>Institution</span><input [(ngModel)]="newEntry.institution"
+                name="ni"></label><label><span>Degree</span><input [(ngModel)]="newEntry.degree"
+                name="nd"></label><label><span>Field</span><input [(ngModel)]="newEntry.field"
+                name="nf"></label><label><span>Start year</span><input type="number" [(ngModel)]="newEntry.startYear"
+                name="ns"></label><label><span>End year</span><input type="number" [(ngModel)]="newEntry.endYear"
+                name="ne"></label><label class="full"><span>Description</span><textarea
+                [(ngModel)]="newEntry.description" name="desc"></textarea></label></div>
+    <div class="admin-btn-row"><button class="admin-btn primary" (click)="add()"><i class="fa-solid fa-plus"></i>Add
+            education</button></div>
+</div>

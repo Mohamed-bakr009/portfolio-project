@@ -1,0 +1,34 @@
+<div class="admin-page-head">
+    <h1>Experience</h1>
+    <p>Add, edit, hide/show or permanently delete experience entries. Visible entries appear above the public projects.
+    </p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+<div class="admin-card">
+    <div class="admin-list">@for(e of entries();track e._id){<div class="admin-item"
+            [class.is-hidden]="e.visible===false">
+            <div class="skill-edit-fields"><input [(ngModel)]="e.company" [name]="'c'+e._id"
+                    placeholder="Company"><input [(ngModel)]="e.position" [name]="'p'+e._id"
+                    placeholder="Position"><input [(ngModel)]="e.startDate" [name]="'s'+e._id"
+                    placeholder="Start date"><input [(ngModel)]="e.endDate" [name]="'en'+e._id" placeholder="End date">
+            </div><textarea class="admin-inline-textarea" [(ngModel)]="e.description" [name]="'d'+e._id" rows="2"
+                placeholder="Description"></textarea>
+            <div class="admin-item-actions"><button class="admin-btn primary small" (click)="save(e)"><i
+                        class="fa-solid fa-floppy-disk"></i>Save</button><button class="admin-btn ghost small"
+                    (click)="toggle(e)"><i class="fa-solid" [class.fa-eye]="e.visible===false"
+                        [class.fa-eye-slash]="e.visible!==false"></i>{{e.visible!==false?'Hide':'Show'}}</button><button
+                    class="admin-btn danger small" (click)="remove(e)"><i class="fa-solid fa-trash"></i>Delete</button>
+            </div>
+        </div>}@empty{<p class="admin-empty">No experience entries.</p>}</div>
+</div>
+<div class="admin-card">
+    <h2>Add experience</h2>
+    <div class="admin-form-grid"><label><span>Company</span><input [(ngModel)]="newEntry.company"
+                name="nc"></label><label><span>Position</span><input [(ngModel)]="newEntry.position"
+                name="np"></label><label><span>Start</span><input [(ngModel)]="newEntry.startDate"
+                name="ns"></label><label><span>End</span><input [(ngModel)]="newEntry.endDate" name="ne"></label><label
+            class="full"><span>Description</span><textarea [(ngModel)]="newEntry.description"
+                name="nd"></textarea></label></div>
+    <div class="admin-btn-row"><button class="admin-btn primary" (click)="add()"><i class="fa-solid fa-plus"></i>Add
+            experience</button></div>
+</div>

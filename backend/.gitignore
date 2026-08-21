@@ -1,0 +1,5 @@
+node_modules/
+uplodes/*
+!uplodes/.gitkeep
+.env
+*.log

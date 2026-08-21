@@ -1,0 +1,60 @@
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hello handwritten">This is</p>
+      @if (profile().show.name && profile().name) { <h1 class="stack-name">{{profile().name}}</h1> }
+      @if (profile().show.title && profile().role) { <p class="role handwritten">a {{profile().role}}</p> }
+      @if (profile().show.bio && profile().heroText) { <p class="hero-text">{{profile().heroText}}</p> }
+      <div class="hero-actions"><a class="btn primary" href="#projects">Explore My Work <i
+            class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="btn ghost" href="#contact">Let's Talk <i
+            class="fa-regular fa-paper-plane"></i></a></div>
+      @if(profile().socials.length || profile().show.location) {
+      <div class="hero-socials">
+        @for(s of profile().socials; track s._id || s.platform) { <a [href]="s.url" target="_blank" rel="noopener"
+          [attr.aria-label]="s.platform"><i [class]="socialIcon(s)"></i></a> }
+        @if(profile().show.email && profile().email){<a [href]="'mailto:'+profile().email" aria-label="Email"><i
+            class="fa-regular fa-envelope"></i></a>}
+        <div class="social-line"></div>
+        @if(profile().show.location && profile().location){<span>{{profile().location}}</span>}
+      </div>
+      }
+      <div class="availability-wrap hero-avail">
+        <button class="mini-label" type="button" (click)="toggleAvailability($event)"><span></span>
+          {{profile().availability[0].title || 'Availability'}}</button>
+        <div class="availability-pop" [class.open]="availabilityOpen">
+          <div class="avail-pop-head"><i class="fa-solid fa-briefcase"></i> AVAILABILITY STATUS</div>
+          @for(item of profile().availability; track item.title){<div class="avail-item">
+            <div class="avail-row"><b>{{item.title}}</b><span class="avail-tag" [class.open]="item.status==='open'"
+                [class.progress]="item.status==='progress'">{{item.status==='open'?'OPEN':item.status==='progress'?'IN
+                PROGRESS':'CLOSED'}}</span></div><small>{{item.note}}</small>
+          </div>}
+        </div>
+      </div>
+    </div>
+    <div class="hero-art" (mousemove)="onHeroArtMouseMove($event)" (mouseleave)="onHeroArtMouseLeave($event)">
+      @if(profile().show.image && profile().image){
+      <div class="orbit orbit-a"></div>
+      <div class="orbit orbit-b"></div>
+      <div class="dot-field">••••••••<br>••••••••<br>••••••••</div>
+      <div class="portrait-ring">
+        <div class="portrait">
+          <div class="portrait-tilt" id="portraitTilt"><img [src]="profile().image" alt="Profile photo"
+              (error)="onImageError($event)">
+            <div class="portrait-placeholder"><i class="fa-regular fa-user"></i><b>PROFILE PHOTO</b></div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="hero-card card-top"><i class="fa-solid fa-code"></i>
+        <div><b>Web Development</b><span>React · PHP · MySQL</span></div>
+      </div>
+      <div class="hero-card card-bottom"><i class="fa-solid fa-bolt"></i>
+        <div><b>Problem Solver</b><span>DSA &amp; clean code</span></div>
+      </div>
+    </div>
+  </div>
+  @if(techIcons().length){<div class="container tech-strip"><span>TECHNOLOGIES I WORK WITH</span>
+    <div class="tech-icons">@for(tech of techIcons();track tech.title){<b [title]="tech.title"><i
+          [class]="tech.icon"></i></b>}</div>
+  </div>}
+</section>

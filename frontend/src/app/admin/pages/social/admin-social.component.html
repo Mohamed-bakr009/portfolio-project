@@ -1,0 +1,29 @@
+<div class="admin-page-head">
+  <h1>Social Links</h1>
+  <p>Independent from Profile. Add any platform you want; there is no hard-coded platform limit.</p>
+</div>
+@if(message()){<div class="admin-alert error">{{message()}}</div>}
+<div class="admin-card">
+  <div class="admin-form-grid"><label><span>Platform name</span><input [(ngModel)]="newSocial.platform" name="platform"
+        placeholder="GitHub, LinkedIn, Behance..."></label><label><span>URL</span><input [(ngModel)]="newSocial.url"
+        name="url" placeholder="https://..."></label></div>
+  <div class="admin-btn-row"><button class="admin-btn primary" (click)="add()"><i class="fa-solid fa-plus"></i>Add
+      social</button></div>
+</div>
+<div class="admin-card">
+  @if(socials().length){<div class="admin-list">
+    @for(s of socials();track s._id){
+    <div class="admin-item">
+      <div class="admin-item-main">
+        <div class="admin-social-icon"><i [class]="s.icon || 'fa-solid fa-link'"></i></div><input
+          [(ngModel)]="s.platform" [name]="'p-'+s._id"><input [(ngModel)]="s.url" [name]="'u-'+s._id">
+      </div>
+      <div class="admin-item-actions"><button class="admin-btn primary small" (click)="save(s)"><i
+            class="fa-solid fa-floppy-disk"></i>Save</button><button class="admin-btn ghost small"
+          (click)="toggle(s)"><i class="fa-solid" [class.fa-eye]="s.visible!==false"
+            [class.fa-eye-slash]="s.visible===false"></i>{{s.visible!==false?'Shown':'Hidden'}}</button><button
+          class="admin-btn danger small" (click)="remove(s)"><i class="fa-solid fa-trash"></i>Delete</button></div>
+    </div>
+    }
+  </div>}@else{<p class="admin-empty">No social links yet.</p>}
+</div>

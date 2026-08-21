@@ -1,0 +1,16 @@
+<section class="contact" id="contact">
+    <div class="container contact-grid">
+        <div>
+            <div class="section-kicker">04 — CONTACT</div>
+            <h2>Let's build something<br><span>great together.</span></h2>
+            <p>Have a project in mind? Send me a message and let's talk about it.</p>
+            @if(profile().show.email&&profile().email){<a class="btn light" [href]="'mailto:'+profile().email">Start a
+                conversation <i class="fa-regular fa-paper-plane"></i></a>}
+        </div>
+        <div class="contact-list">@if(profile().show.email&&profile().email){<a [href]="'mailto:'+profile().email"
+                appReveal><i
+                    class="fa-regular fa-envelope"></i><span><small>Email</small><b>{{profile().email}}</b></span></a>}@for(s
+            of profile().socials;track s._id||s.platform){<a [href]="s.url" target="_blank" rel="noopener" appReveal><i
+                    [class]="socialIcon(s)"></i><span><small>{{s.platform}}</small><b>{{s.url}}</b></span></a>}</div>
+    </div>
+</section>

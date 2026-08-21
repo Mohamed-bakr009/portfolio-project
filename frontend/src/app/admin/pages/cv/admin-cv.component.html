@@ -1,0 +1,48 @@
+<div class="admin-page-head">
+    <h1>CV / Resume</h1>
+    <p>One CV only. Upload / Replace updates the current PDF and its parsed data. Hide removes it from the public
+        portfolio. Delete removes the CV permanently.</p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+<div class="admin-card">
+    <div class="admin-cv-upload">
+        @if(cv()){<p><i class="fa-regular fa-file-pdf"></i> <strong>{{cv()!.fileName}}</strong> <span
+                class="cv-status">{{ cv()!.visible === false ? "Hidden" : "Visible" }}</span></p>
+        <div class="admin-btn-row center"><a class="admin-btn ghost small" [href]="pdfUrl()" target="_blank">Open
+                PDF</a><button class="admin-btn ghost small" (click)="hide()"><i class="fa-solid fa-eye-slash"></i>Hide
+                CV</button><button class="admin-btn primary small" (click)="show()"><i class="fa-solid fa-eye"></i>Show
+                CV</button><button class="admin-btn danger small" (click)="remove()"><i
+                    class="fa-solid fa-trash"></i>Delete CV</button></div>}@else{<p>No CV currently uploaded.</p>}
+        <div class="admin-btn-row center"><label class="admin-btn primary"><i
+                    class="fa-solid fa-upload"></i>{{uploading()?'Uploading…':'Upload / Replace CV'}}<input type="file"
+                    accept="application/pdf" (change)="onFileSelected($event)" hidden></label>@if(cv()){<button
+                class="admin-btn ghost" [disabled]="reparsing()" (click)="reparse()"><i
+                    class="fa-solid fa-rotate"></i>Re-parse</button>}</div>
+    </div>
+</div>
+@if(cv()?.parsedData){<div class="admin-card">
+    <h2>Extracted content preview</h2>@if(cv()!.parsedData!.summary){<div class="admin-cv-section">
+        <h3>Summary</h3>
+        <p>{{cv()!.parsedData!.summary}}</p>
+    </div>}<div class="admin-cv-section">
+        <h3>Selected Projects</h3>@for(x of cv()!.parsedData!.projects;track $index){<p><strong>{{x.title}}</strong> —
+            {{x.org}}</p>}
+    </div>
+    <div class="admin-cv-section">
+        <h3>Education</h3>@for(x of cv()!.parsedData!.education;track $index){<p><strong>{{x.title}}</strong> —
+            {{x.org}} {{x.date}}</p>}
+    </div>
+    <div class="admin-cv-section">
+        <h3>Experience</h3>@for(x of cv()!.parsedData!.experience;track $index){<p><strong>{{x.title}}</strong> —
+            {{x.org}} {{x.date}}</p>}
+    </div>
+    <div class="admin-cv-section">
+        <h3>Training &amp; Certifications</h3>@for(x of cv()!.parsedData!.training;track $index){<p>
+            <strong>{{x.title}}</strong> — {{x.org}}
+        </p>}
+    </div>
+    <div class="admin-cv-section">
+        <h3>Technical Skills</h3>
+        <div class="admin-cv-tags">@for(x of cv()!.parsedData!.techSkills;track x){<span>{{x}}</span>}</div>
+    </div>
+</div>}

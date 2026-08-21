@@ -1,0 +1,77 @@
+<div class="admin-page-head">
+  <h1>Profile</h1>
+  <p>Profile data only. Social links are managed separately.</p>
+</div>
+@if(message()){<div class="admin-alert success">{{message()}}</div>}
+
+<div class="admin-card">
+  <div class="admin-avatar-row">
+    @if(imagePreview() && profile.show?.image){<img class="admin-avatar" [src]="imagePreview()"
+      alt="Profile photo">}@else{<div class="admin-avatar"></div>}
+    <div class="admin-btn-row compact">
+      <label class="admin-btn primary small"><i class="fa-solid fa-upload"></i>Upload / Replace<input type="file"
+          accept="image/*" (change)="onImageSelected($event)" hidden></label>
+      <button class="admin-btn ghost small" (click)="toggle('image')"><i class="fa-solid"
+          [class.fa-eye]="profile.show?.image"
+          [class.fa-eye-slash]="!profile.show?.image"></i>{{profile.show?.image?'Hide image':'Show image'}}</button>
+      <button class="admin-btn danger small" (click)="removeImage()"><i class="fa-solid fa-trash"></i>Delete
+        image</button>
+    </div>
+  </div>
+
+  <div class="admin-form-grid">
+    <label><span>Name</span><input [(ngModel)]="profile.name" name="name"></label>
+    <label><span>Title / Role</span><input [(ngModel)]="profile.title" name="title"></label>
+    <label class="full"><span>Bio</span><textarea [(ngModel)]="profile.bio" name="bio" rows="4"></textarea></label>
+    <label><span>Location</span><input [(ngModel)]="profile.location" name="location"></label>
+    <label><span>Email</span><input [(ngModel)]="profile.email" name="email"></label>
+    <label><span>Phone</span><input [(ngModel)]="profile.phone" name="phone"></label>
+  </div>
+
+  <div class="visibility-grid">
+    <button class="admin-visibility" [class.active]="profile.show?.name" (click)="toggle('name')"><i class="fa-solid"
+        [class.fa-eye]="profile.show?.name" [class.fa-eye-slash]="!profile.show?.name"></i>Name</button>
+    <button class="admin-visibility" [class.active]="profile.show?.title" (click)="toggle('title')"><i class="fa-solid"
+        [class.fa-eye]="profile.show?.title" [class.fa-eye-slash]="!profile.show?.title"></i>Title</button>
+    <button class="admin-visibility" [class.active]="profile.show?.bio" (click)="toggle('bio')"><i class="fa-solid"
+        [class.fa-eye]="profile.show?.bio" [class.fa-eye-slash]="!profile.show?.bio"></i>Bio</button>
+    <button class="admin-visibility" [class.active]="profile.show?.location" (click)="toggle('location')"><i
+        class="fa-solid" [class.fa-eye]="profile.show?.location"
+        [class.fa-eye-slash]="!profile.show?.location"></i>Location</button>
+    <button class="admin-visibility" [class.active]="profile.show?.email" (click)="toggle('email')"><i class="fa-solid"
+        [class.fa-eye]="profile.show?.email" [class.fa-eye-slash]="!profile.show?.email"></i>Email</button>
+    <button class="admin-visibility" [class.active]="profile.show?.phone" (click)="toggle('phone')"><i class="fa-solid"
+        [class.fa-eye]="profile.show?.phone" [class.fa-eye-slash]="!profile.show?.phone"></i>Phone</button>
+  </div>
+  <div class="admin-btn-row"><button class="admin-btn primary" [disabled]="saving()" (click)="save()"><i
+        class="fa-solid fa-floppy-disk"></i>{{saving()?'Saving…':'Save profile changes'}}</button></div>
+</div>
+
+<div class="admin-card">
+  <h2>Portfolio visibility</h2>
+  <p class="admin-empty">This is the global switch. When hidden, the public portfolio is unavailable.</p>
+  <button class="admin-btn" [class.danger]="profile.portfolioVisible" [class.primary]="!profile.portfolioVisible"
+    (click)="togglePortfolio()">
+    <i class="fa-solid" [class.fa-eye-slash]="profile.portfolioVisible" [class.fa-eye]="!profile.portfolioVisible"></i>
+    {{profile.portfolioVisible?'Hide portfolio':'Show portfolio'}}
+  </button>
+</div>
+
+<div class="admin-card">
+  <h2>Availability</h2>
+  <div class="admin-form-grid">
+    <label><span>Button title</span><input [(ngModel)]="profile.availabilityTitle" name="availabilityTitle"
+        placeholder="Open to opportunities"></label>
+    <label><span>Status</span><select [(ngModel)]="profile.available" name="available">
+        <option [ngValue]="true">Available</option>
+        <option [ngValue]="false">Not available</option>
+      </select></label>
+    <label class="full"><span>Description</span><textarea [(ngModel)]="profile.availabilityNote" name="availabilityNote"
+        rows="3"></textarea></label>
+  </div>
+  <div class="admin-btn-row">
+    <button class="admin-btn primary" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>Save availability</button>
+    <button class="admin-btn ghost" (click)="toggleAvailability()"><i class="fa-solid fa-toggle-on"></i>Quick toggle
+      status</button>
+  </div>
+</div>
