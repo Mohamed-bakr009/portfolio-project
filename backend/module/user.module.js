@@ -1,7 +1,12 @@
 const mongooes=require('mongoose')
 const userSceam = new mongooes.Schema({
 
-   
+   username: {
+    type: String,
+    required: true,
+    trim: true
+},
+
     email:{
         type: String,
         lowercase: true,
@@ -14,7 +19,9 @@ const userSceam = new mongooes.Schema({
         required: true
     },
 
-  
+  isBackup: { 
+    type: Boolean, default: false
+ },
 
 
 },{timestamps:true})
